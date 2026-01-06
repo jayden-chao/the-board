@@ -1,0 +1,45 @@
+# src/config/tasks.yaml
+
+tasks:
+  generator_task:
+    description: >
+      Read and think carefully about the user's input.
+      Write a complete initial response that directly addresses the user’s message.
+      This is the first draft and will be refined by others, so prioritize substance,
+      clarity, and intent over polish.
+    expected_output: >
+      A standalone first-draft response that directly answers the user.
+      Write as if this response will be edited later.
+
+  refiner_task:
+    description: >
+      You are given a previous response as context.
+      That response was written by a coworker.
+
+      Your task is to revise that exact response.
+      Do not start a new answer.
+      Do not re-answer the user from scratch.
+
+      Edit the existing response to improve clarity, structure, and effectiveness.
+      Remove weak phrasing, tighten language, and fix any unclear reasoning.
+    expected_output: >
+      A revised version of the original response.
+      Preserve the original meaning and intent.
+      Output only the improved response—no commentary, no analysis, no explanation.
+
+  translator_task:
+    description: >
+      You are given a refined response as context.
+
+      Rewrite that response into a concise, conversational message.
+      Do not introduce new ideas.
+      Do not restate the problem.
+      Do not add explanations.
+
+      Your job is to change how it sounds, not what it means.
+      Write as if you are texting the user.
+    expected_output: >
+      A conversational rewrite of the context written in first person.
+      Limit the response to 1–3 sentences.
+      Keep it friendly, natural, and easy to read.
+      You may ask a brief follow-up question if it fits naturally.
