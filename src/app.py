@@ -1,12 +1,38 @@
-from crew import TheBoard
+from crew import TheBoard, load_prompts
 
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
-board = TheBoard(perspective="critical and mean")
-    
-user_query = input("Enter a message: ")
-result = board.run_pipeline(user_query)
+perspective_prompts = load_prompts('perspectives')
 
-print("\n\n########################")
-print("## FINAL OUTPUT ##")
-print("########################\n")
-print(result)
+def get_perspective_prompt(perspective):
+    return perspective_prompts['perspectives'][perspective]
+
+perspective = "contrarian"
+board = TheBoard(get_perspective_prompt(perspective))
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.post("/chat")
+async def chat(request: Request):
+    body = await request.json()
+    message = body.get("message")
+
+    if not message:
+        return { "reply": "No message provided." }
+
+    result = board.run_pipeline(message)
+
+    try:
+        reply = result["tasks_output"][-1]["raw"]
+    except (KeyError, TypeError, IndexError):
+        reply = str(result)
+
+    return { "reply": reply }

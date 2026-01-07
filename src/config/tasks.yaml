@@ -30,6 +30,6 @@ tasks:
       Style should reflect {perspective} and be natural like a text to a friend.
     expected_output: >
       A conversational rewrite of the context in first person.
-      Limit to 1-3 sentences.
+      Limit to 1-2 sentences.
       Tone should be friendly, natural, and reflect {perspective}.
       You may ask a brief follow-up question if it fits.

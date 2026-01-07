@@ -36,8 +36,9 @@ class TheBoard():
 
     def __init__(self, perspective="neutral"):
         
-        # --- Agents ---
         self.perspective = perspective
+        
+        # --- Agents ---
 
         self.generator = Agent(
             role=get_agent_prompt('generator','role',agent_prompts),
@@ -86,6 +87,8 @@ class TheBoard():
             context=[self.refined_response]
         )
 
+        # --- Crew ---
+
         self.crew = Crew(
             agents=[self.generator, self.refiner, self.translator],
             tasks=[self.base_response, self.refined_response, self.translate_response],
@@ -95,8 +98,10 @@ class TheBoard():
 
 
     def run_pipeline(self, user_input):
+
         inputs = {
             'user_input': user_input
         }
+
         return self.crew.kickoff(inputs=inputs)
 
