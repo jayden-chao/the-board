@@ -16,29 +16,57 @@ def run(inputs):
     """
     Run crew given inputs
     """
-
-    inputs = inputs
-
+    from crew import load_prompts
+    
+    perspective_prompts = load_prompts('perspectives')
+    perspective = "contrarian"  # Default perspective
+    perspective_prompt = perspective_prompts['perspectives'][perspective]
+    
+    board = TheBoard(perspective_prompt)
+    user_input = inputs.get('user_input', '')
+    
     try:
-        TheBoard().crew().kickoff(inputs=inputs)
+        return board.run_pipeline(user_input)
     except Exception as e:
-        raise Exception(f"Error occured while running crew! :(")
+        raise Exception(f"Error occured while running crew! : {e}")
 
 def train(n_iters, filename, inputs=None):
-    inputs = inputs
-
-    return TheBoard().crew().train(n_iterations=n_iters, filename=filename, inputs=inputs)
+    from crew import load_prompts
+    
+    perspective_prompts = load_prompts('perspectives')
+    perspective = "contrarian"
+    perspective_prompt = perspective_prompts['perspectives'][perspective]
+    
+    board = TheBoard(perspective_prompt)
+    user_input = inputs.get('user_input', '') if inputs else ''
+    
+    return board.crew.train(n_iterations=n_iters, filename=filename, inputs={'user_input': user_input})
 
 def replay(task_id):
     """
     Replay crew execution from a specific task
     """
-    return TheBoard().crew().replay(task_id=task_id)
+    from crew import load_prompts
+    
+    perspective_prompts = load_prompts('perspectives')
+    perspective = "contrarian"
+    perspective_prompt = perspective_prompts['perspectives'][perspective]
+    
+    board = TheBoard(perspective_prompt)
+    return board.crew.replay(task_id=task_id)
 
 def test(n_iterations, eval_llm, inputs=None):
     """Test the crew for n_iterations with a specific LLM."""
-    inputs = inputs
-    return TheBoard().crew().test(n_iterations=n_iterations, eval_llm=eval_llm, inputs=inputs)
+    from crew import load_prompts
+    
+    perspective_prompts = load_prompts('perspectives')
+    perspective = "contrarian"
+    perspective_prompt = perspective_prompts['perspectives'][perspective]
+    
+    board = TheBoard(perspective_prompt)
+    user_input = inputs.get('user_input', '') if inputs else ''
+    
+    return board.crew.test(n_iterations=n_iterations, eval_llm=eval_llm, inputs={'user_input': user_input})
 
 def run_with_trigger(trigger_json):
     """Run the crew using a JSON trigger payload."""

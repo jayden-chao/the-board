@@ -5,7 +5,10 @@ description = "The-Board using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "crewai[tools]==1.7.2"
+    "crewai[tools]==1.7.2",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "python-dotenv>=1.0.0"
 ]
 
 [project.scripts]

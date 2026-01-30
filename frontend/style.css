@@ -50,7 +50,7 @@ body {
     color: white;
   }
   
-  #send-btn {
+  #sendBtn {
     padding: 10px 15px;
     border: none;
     background: #333;
@@ -58,7 +58,7 @@ body {
     cursor: pointer;
   }
   
-  #send-btn:hover {
+  #sendBtn:hover {
     background: #444;
   }
   
