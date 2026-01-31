@@ -104,4 +104,3 @@ class TheBoard():
         }
 
         return self.crew.kickoff(inputs=inputs)
-

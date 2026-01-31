@@ -1,6 +1,8 @@
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const sendBtn = document.getElementById("sendBtn");
+input.disabled = true;
+sendBtn.disabled = true;
 
 const SESSION_KEY = "session_id";
 let session_id = null;
@@ -15,6 +17,8 @@ async function initSession() {
     session_id = existingSessionId;
     console.log("Using existing session:", existingSessionId);
     await loadHistory();
+    input.disabled = false;
+    sendBtn.disabled = false;
     return;
   }
 
@@ -29,11 +33,15 @@ async function initSession() {
 
   await loadHistory();
 
+  input.disabled = false;
+  sendBtn.disabled = false;
+
 }
 
 sendBtn.addEventListener("click", sendMessage);
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
+    e.preventDefault();
     sendMessage();
   }
 });
@@ -69,9 +77,11 @@ async function sendMessage() {
 function addMessage(role, text) {
 
   const div = document.createElement("div");
+  console.log("creating div");
   div.classList.add("message", role);
   div.textContent = text;
   chat.appendChild(div);
+  console.log("appending div");
   chat.scrollTop = chat.scrollHeight;
 
 }
