@@ -1,54 +1,37 @@
-# TheBoard Crew
+# The Board 🧠💬
 
-Welcome to the TheBoard Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+**The Board** is a multi-agent AI chat application built with **FastAPI**, **CrewAI**, and a lightweight JavaScript frontend.  
+It allows users to have structured conversations with an AI “board” made up of multiple agents (Generator, Refiner, Translator), with switchable perspectives such as **supporter** or **contrarian**.
 
-## Installation
+The app supports persistent chat sessions, message history, and real-time perspective changes.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+---
 
-First, if you haven't already, install uv:
+## Features
 
-```bash
-pip install uv
-```
+- 🧩 **Multi-agent reasoning** using CrewAI
+- 🔄 **Sequential response pipeline** (generate → refine → translate)
+- 🎭 **Dynamic perspectives** (e.g. supporter, contrarian)
+- 💬 **Session-based chat history** stored in a database
+- 🌐 **FastAPI backend** with REST endpoints
+- 🖥️ **Vanilla JavaScript frontend**
+- 🔓 CORS-enabled API for easy frontend integration
 
-Next, navigate to your project directory and install the dependencies:
+---
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+## Tech Stack
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+**Backend**
+- Python
+- FastAPI
+- CrewAI
+- SQLite (via custom DB utilities)
+- Pydantic
 
-- Modify `src/the_board/config/agents.yaml` to define your agents
-- Modify `src/the_board/config/tasks.yaml` to define your tasks
-- Modify `src/the_board/crew.py` to add your own logic, tools and specific args
-- Modify `src/the_board/main.py` to add custom inputs for your agents and tasks
+**Frontend**
+- HTML / CSS
+- Vanilla JavaScript
+- Fetch API
+- LocalStorage for session persistence
 
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
-```
-
-This command initializes the The-Board Crew, assembling the agents and assigning them tasks as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The The-Board Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the TheBoard Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+---
