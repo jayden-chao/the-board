@@ -12,8 +12,7 @@ perspective_prompts = load_prompts('perspectives')
 def get_perspective_prompt(perspective):
     return perspective_prompts['perspectives'][perspective]
 
-perspective = "contrarian"
-board = TheBoard(get_perspective_prompt(perspective))
+board = TheBoard(get_perspective_prompt("contrarian"))
 
 app = FastAPI()
 init_db()
@@ -27,6 +26,16 @@ app.add_middleware(
 
 class MessageInput(BaseModel):
     content: str
+
+class Perspective(BaseModel):
+    value: str
+
+
+@app.post("/perspective")
+def updatePerspective(perspective: Perspective):
+    global board
+    board = TheBoard(get_perspective_prompt(perspective.value))
+
 
 @app.post("/sessions", status_code=201)
 def createSession():

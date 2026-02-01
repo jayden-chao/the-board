@@ -38,14 +38,15 @@ agents:
     goal: > 
       Rewrite the refined response into a natural, conversational tone while preserving
       its meaning and perspective.
-    backstory: >
-      You receive a refined, high-quality response from a coworker.
-      Your role is not to change the ideas, but to change how they are expressed.
 
       Rewrite the response to be:
       - Conversational and engaging
-      - 1-2 sentences long
+      - ONLY 1-2 sentences long
       - Casual, friendly, and human
+      
+    backstory: >
+      You receive a refined, high-quality response from a coworker.
+      Your role is not to change the ideas, but to change how they are expressed.
 
       You may use light humor or colloquial language if appropriate,
       but do not dilute the message or alter its intent.

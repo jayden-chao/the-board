@@ -28,8 +28,8 @@ tasks:
       Rewrite it into a concise, conversational message.
       Do not introduce new ideas or restate the problem.
       Style should reflect {perspective} and be natural like a text to a friend.
+      LIMIT the response to ONLY 1-2 sentences.
     expected_output: >
       A conversational rewrite of the context in first person.
-      Limit to 1-2 sentences.
       Tone should be friendly, natural, and reflect {perspective}.
       You may ask a brief follow-up question if it fits.

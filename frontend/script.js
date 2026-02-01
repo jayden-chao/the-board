@@ -1,6 +1,10 @@
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const sendBtn = document.getElementById("sendBtn");
+const contrarian = document.getElementById("agent-contrarian");
+const supporter = document.getElementById("agent-supporter");
+let perspective = "supporter";
+
 input.disabled = true;
 sendBtn.disabled = true;
 
@@ -38,6 +42,7 @@ async function initSession() {
 
 }
 
+
 sendBtn.addEventListener("click", sendMessage);
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -45,6 +50,44 @@ input.addEventListener("keydown", (e) => {
     sendMessage();
   }
 });
+
+
+document.querySelectorAll("#agents img").forEach((img) => {
+  img.addEventListener("click", () => {
+
+    const isActive = img.classList.contains("active");
+
+    document.querySelectorAll("#agents img").forEach((other) => {
+      other.classList.remove("active");
+    });
+
+    if (!isActive) {
+      img.classList.add("active");
+    }
+
+    if (contrarian.classList.contains("active")) {
+      perspective = "contrarian";
+    } else if (supporter.classList.contains("active")) {
+      perspective = "supporter";
+    }
+
+    updatePerspective(perspective)
+
+  });
+});
+
+
+async function updatePerspective(perspective) {
+  
+  const response = await fetch("http://127.0.0.1:8000/perspective", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({value: perspective})
+  })
+}
+
 
 async function sendMessage() {
   const message = input.value.trim();
@@ -70,7 +113,7 @@ async function sendMessage() {
   addMessage("board", data.content.raw);
   console.log("Board Reply:", data)
 
-  input.value = ""
+  input.value = "";
 
 }
 
